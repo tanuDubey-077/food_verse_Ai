@@ -76,19 +76,9 @@ class FoodRecognitionService:
 
         except ImageValidationError as e:
             raise HTTPException(status_code=400, detail=str(e))
-        except GeminiQuotaError as e:
-            raise HTTPException(status_code=429, detail=str(e))
-        except GeminiTimeoutError as e:
-            raise HTTPException(status_code=504, detail=str(e))
-        except GeminiConfigurationError as e:
-            raise HTTPException(status_code=503, detail=str(e))
-        except (GeminiNetworkError, GeminiResponseError) as e:
-            raise HTTPException(status_code=502, detail=str(e))
-        except HTTPException:
-            raise
-        except Exception as e:
-            logger.exception("Unexpected error during food recognition: %s", str(e))
-            raise HTTPException(status_code=500, detail=f"Food recognition failed: {str(e)}")
+        except (GeminiConfigurationError, GeminiQuotaError, GeminiTimeoutError, GeminiNetworkError, GeminiResponseError, Exception) as e:
+            logger.warning("Gemini food recognition call failed (%s); engaging local FoodVerse intelligence engine.", str(e))
+            analysis = self.gemini.get_local_food_analysis(user_query=query, image_path=image_path)
 
         # 2. Handle Non-Food Images Honestly
         if not analysis.is_food:

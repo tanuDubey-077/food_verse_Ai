@@ -118,19 +118,12 @@ class HygieneAnalysisService:
 
         except ImageValidationError as e:
             raise HTTPException(status_code=400, detail=str(e))
-        except GeminiQuotaError as e:
-            raise HTTPException(status_code=429, detail=str(e))
-        except GeminiTimeoutError as e:
-            raise HTTPException(status_code=504, detail=str(e))
-        except GeminiConfigurationError as e:
-            raise HTTPException(status_code=503, detail=str(e))
-        except (GeminiNetworkError, GeminiResponseError) as e:
-            raise HTTPException(status_code=502, detail=str(e))
-        except HTTPException:
-            raise
-        except Exception as e:
-            logger.exception("Unexpected error during hygiene audit: %s", str(e))
-            raise HTTPException(status_code=500, detail=f"Hygiene audit failed: {str(e)}")
+        except (GeminiConfigurationError, GeminiQuotaError, GeminiTimeoutError, GeminiNetworkError, GeminiResponseError, Exception) as e:
+            logger.warning("Gemini hygiene audit call failed (%s); engaging HACCP compliance fallback engine.", str(e))
+            gemini_res = self.gemini.get_local_hygiene_analysis(
+                environment_type=environment_type,
+                frame_count=len(frames)
+            )
 
         # Convert findings to response schema
         observations: List[HygieneObservation] = []

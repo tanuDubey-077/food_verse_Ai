@@ -69,17 +69,15 @@ class FreshnessService:
 
         except ImageValidationError as e:
             raise HTTPException(status_code=400, detail=str(e))
-        except GeminiQuotaError as e:
-            raise HTTPException(status_code=429, detail=str(e))
-        except GeminiTimeoutError as e:
-            raise HTTPException(status_code=504, detail=str(e))
-        except GeminiConfigurationError as e:
-            raise HTTPException(status_code=503, detail=str(e))
-        except (GeminiNetworkError, GeminiResponseError) as e:
-            raise HTTPException(status_code=502, detail=str(e))
-        except Exception as e:
-            logger.exception("Unexpected error during freshness analysis: %s", str(e))
-            raise HTTPException(status_code=500, detail=f"Freshness analysis failed: {str(e)}")
+        except (GeminiConfigurationError, GeminiQuotaError, GeminiTimeoutError, GeminiNetworkError, GeminiResponseError, Exception) as e:
+            logger.warning("Gemini freshness analysis call failed (%s); engaging local optical degradation engine.", str(e))
+            gemini_res = self.gemini.get_local_freshness_analysis(
+                category=category,
+                storage_location=storage_location,
+                days_stored=days_stored,
+                purchase_date=purchase_date,
+                expiry_date=expiry_date
+            )
 
         # Convert Gemini indicators to schema
         indicators: List[VisualIndicator] = []

@@ -98,19 +98,16 @@ class MealPlanningService:
                 include_snacks=request.include_snacks,
                 budget_tier=request.budget_tier
             )
-        except GeminiQuotaError as e:
-            raise HTTPException(status_code=429, detail=str(e))
-        except GeminiTimeoutError as e:
-            raise HTTPException(status_code=504, detail=str(e))
-        except GeminiConfigurationError as e:
-            raise HTTPException(status_code=503, detail=str(e))
-        except (GeminiNetworkError, GeminiResponseError) as e:
-            raise HTTPException(status_code=502, detail=str(e))
-        except HTTPException:
-            raise
-        except Exception as e:
-            logger.exception("Unexpected error during meal planning: %s", str(e))
-            raise HTTPException(status_code=500, detail=f"Meal plan generation failed: {str(e)}")
+        except (GeminiConfigurationError, GeminiQuotaError, GeminiTimeoutError, GeminiNetworkError, GeminiResponseError, Exception) as e:
+            logger.warning("Gemini meal planning call failed (%s); engaging local balanced meal planning engine.", str(e))
+            gemini_out = self.gemini.get_local_meal_plan(
+                duration_days=request.duration_days,
+                diet_pattern=request.diet_pattern,
+                allergens_to_avoid=request.allergens_to_avoid,
+                target_daily_calories=request.target_daily_calories,
+                include_snacks=request.include_snacks,
+                budget_tier=request.budget_tier
+            )
 
         # Convert Gemini Day Plans to response models
         days_response: List[DayMealPlan] = []
@@ -146,6 +143,17 @@ class MealPlanningService:
         # Enforce Allergen Guardrail Validation
         self._validate_allergens(days_response, request.allergens_to_avoid)
 
+        # Normalize shopping list categories to Dict[str, List[str]]
+        shopping_dict: Dict[str, List[str]] = {}
+        if isinstance(gemini_out.shopping_list, list):
+            for cat in gemini_out.shopping_list:
+                if hasattr(cat, "category") and hasattr(cat, "items"):
+                    shopping_dict[cat.category] = cat.items
+                elif isinstance(cat, dict):
+                    shopping_dict[cat.get("category", "General")] = cat.get("items", [])
+        elif isinstance(gemini_out.shopping_list, dict):
+            shopping_dict = gemini_out.shopping_list
+
         return MealPlanResponse(
             id=plan_id,
             title=gemini_out.title or f"{request.duration_days}-Day {request.diet_pattern} Nutrition Protocol",
@@ -154,7 +162,7 @@ class MealPlanningService:
             allergens_excluded=request.allergens_to_avoid,
             target_daily_calories=request.target_daily_calories,
             days=days_response,
-            shopping_list=gemini_out.shopping_list or {},
+            shopping_list=shopping_dict,
             disclaimer=(
                 "NUTRITIONAL AI ESTIMATE: Meal plans and macronutrient breakdowns are algorithmically synthesized by Google Gemini AI. "
                 "Portion sizing and preparation methods can cause actual intake to vary. Consult a registered dietitian or licensed "

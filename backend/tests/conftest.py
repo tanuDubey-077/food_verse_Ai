@@ -16,6 +16,7 @@ from app.ai.gemini_service import (
     GeminiSubstituteResult,
     GeminiSubstituteItem,
     GeminiMealPlanOutput,
+    GeminiShoppingCategory,
     GeminiDayPlan,
     GeminiMealItem,
 )
@@ -277,12 +278,24 @@ def mock_gemini_meal_plan():
                 ]
             )
         ],
-        shopping_list={
-            "Produce": ["Asparagus", "Blueberries", "Cherry tomatoes", "Cucumbers", "Fuji apple", "Garlic", "Sweet potato"],
-            "Pantry & Grains": ["Raw almonds", "Chia seeds", "Extra virgin olive oil", "Kalamata olives", "Quinoa", "Rolled oats", "Brown lentils"],
-            "Meat & Poultry": ["Chicken breast"],
-            "Plant Beverages": ["Unsweetened almond drink"]
-        },
+        shopping_list=[
+            GeminiShoppingCategory(
+                category="Produce",
+                items=["Asparagus", "Blueberries", "Cherry tomatoes", "Cucumbers", "Fuji apple", "Garlic", "Sweet potato"]
+            ),
+            GeminiShoppingCategory(
+                category="Pantry & Grains",
+                items=["Raw almonds", "Chia seeds", "Extra virgin olive oil", "Kalamata olives", "Quinoa", "Rolled oats", "Brown lentils"]
+            ),
+            GeminiShoppingCategory(
+                category="Meat & Poultry",
+                items=["Chicken breast"]
+            ),
+            GeminiShoppingCategory(
+                category="Plant Beverages",
+                items=["Unsweetened almond drink"]
+            )
+        ],
         nutrition_rationale="Personalized Mediterranean nutritional plan generated with allergen exclusions. Focuses on healthy fats, high fiber, and lean protein."
     )
 

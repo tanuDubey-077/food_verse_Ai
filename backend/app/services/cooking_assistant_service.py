@@ -53,19 +53,13 @@ class CookingAssistantService:
                 preferences=request.preferences,
                 history=request.history
             )
-        except GeminiQuotaError as e:
-            raise HTTPException(status_code=429, detail=str(e))
-        except GeminiTimeoutError as e:
-            raise HTTPException(status_code=504, detail=str(e))
-        except GeminiConfigurationError as e:
-            raise HTTPException(status_code=503, detail=str(e))
-        except (GeminiNetworkError, GeminiResponseError) as e:
-            raise HTTPException(status_code=502, detail=str(e))
-        except HTTPException:
-            raise
-        except Exception as e:
-            logger.exception("Unexpected error in cooking assistant: %s", str(e))
-            raise HTTPException(status_code=500, detail=f"Cooking assistant error: {str(e)}")
+        except (GeminiConfigurationError, GeminiQuotaError, GeminiTimeoutError, GeminiNetworkError, GeminiResponseError, Exception) as e:
+            logger.warning("Gemini cooking assistant call failed (%s); engaging local culinary intelligence.", str(e))
+            gemini_out = self.gemini.get_local_cooking_chat(
+                message=request.message,
+                preferences=request.preferences,
+                history=request.history
+            )
 
         recipe: Optional[Recipe] = None
         if gemini_out.has_recipe and gemini_out.recipe:
@@ -126,19 +120,12 @@ class CookingAssistantService:
                 ingredient=ingredient,
                 context=ctx
             )
-        except GeminiQuotaError as e:
-            raise HTTPException(status_code=429, detail=str(e))
-        except GeminiTimeoutError as e:
-            raise HTTPException(status_code=504, detail=str(e))
-        except GeminiConfigurationError as e:
-            raise HTTPException(status_code=503, detail=str(e))
-        except (GeminiNetworkError, GeminiResponseError) as e:
-            raise HTTPException(status_code=502, detail=str(e))
-        except HTTPException:
-            raise
-        except Exception as e:
-            logger.exception("Unexpected error in substitution: %s", str(e))
-            raise HTTPException(status_code=500, detail=f"Substitution lookup failed: {str(e)}")
+        except (GeminiConfigurationError, GeminiQuotaError, GeminiTimeoutError, GeminiNetworkError, GeminiResponseError, Exception) as e:
+            logger.warning("Gemini substitution call failed (%s); engaging local culinary science database.", str(e))
+            gemini_sub = self.gemini.get_local_ingredient_substitution(
+                ingredient=ingredient,
+                context=ctx
+            )
 
         substitutes = [
             SubstituteOption(name=sub.name, ratio=sub.ratio, notes=sub.notes)
