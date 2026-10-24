@@ -1,0 +1,384 @@
+/* ====================================================================
+   FoodVerse AI — Sleek Cyber-Dark AI Design System
+   Obsidian Canvas, Midnight Slate Surfaces, Neon Emerald & Cyan Accents
+   Custom Edition by tanuDubey-077
+   ==================================================================== */
+
+:root {
+  /* Obsidian & Midnight Slate Surfaces */
+  --bg-canvas: #070B14;
+  --bg-canvas-alt: #0D1527;
+  --bg-surface: #111A2E;
+  --bg-surface-elevated: #16223B;
+  --bg-surface-sunken: #0A101D;
+
+  /* Cyber Glow & Depth Shadows */
+  --clay-shadow-sm: 
+    0 4px 12px -2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+
+  --clay-shadow-card: 
+    0 12px 28px -4px rgba(0, 0, 0, 0.6),
+    0 6px 12px -2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+
+  --clay-shadow-hover: 
+    0 20px 36px -4px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(16, 185, 129, 0.18),
+    inset 0 1px 2px rgba(255, 255, 255, 0.14);
+
+  --clay-shadow-sunken: 
+    inset 2px 2px 6px rgba(0, 0, 0, 0.6),
+    0 1px 2px rgba(255, 255, 255, 0.04);
+
+  --clay-shadow-btn-primary: 
+    0 4px 20px rgba(16, 185, 129, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+
+  --clay-shadow-btn-pressed: 
+    0 2px 6px rgba(0, 0, 0, 0.8),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+  /* Cyber Luminous Borders */
+  --border-clay: rgba(51, 65, 85, 0.7);
+  --border-clay-subtle: rgba(30, 41, 59, 0.8);
+  --border-highlight: rgba(148, 163, 184, 0.16);
+
+  /* Module Neon & Tint Accents */
+  /* 1. Food Recognition (Neon Emerald) */
+  --color-recognition-primary: #10B981;
+  --color-recognition-deep: #059669;
+  --color-recognition-light: #34D399;
+  --color-recognition-pastel: rgba(16, 185, 129, 0.14);
+  --color-recognition-border: rgba(16, 185, 129, 0.4);
+
+  /* 2. Freshness Detection (Lime & Citron Neon) */
+  --color-freshness-primary: #A3E635;
+  --color-freshness-deep: #65A30D;
+  --color-freshness-light: #BEF264;
+  --color-freshness-yellow: rgba(253, 224, 71, 0.15);
+  --color-freshness-pastel: rgba(163, 230, 53, 0.14);
+  --color-freshness-border: rgba(163, 230, 53, 0.4);
+
+  /* 3. Restaurant Hygiene (Electric Cyan & Tech Teal) */
+  --color-hygiene-primary: #06B6D4;
+  --color-hygiene-deep: #0891B2;
+  --color-hygiene-teal: #14B8A6;
+  --color-hygiene-pastel: rgba(6, 182, 212, 0.14);
+  --color-hygiene-border: rgba(6, 182, 212, 0.4);
+
+  /* 4. Cooking Assistant (Electric Amber & Tangerine) */
+  --color-cooking-primary: #F59E0B;
+  --color-cooking-deep: #D97706;
+  --color-cooking-coral: #F97316;
+  --color-cooking-pastel: rgba(245, 158, 11, 0.14);
+  --color-cooking-border: rgba(245, 158, 11, 0.4);
+
+  /* 5. Meal Planner (Cyber Violet & Neon Fuchsia) */
+  --color-planner-primary: #A855F7;
+  --color-planner-deep: #9333EA;
+  --color-planner-pink: #EC4899;
+  --color-planner-pastel: rgba(168, 85, 247, 0.14);
+  --color-planner-border: rgba(168, 85, 247, 0.4);
+
+  /* Semantic State Accents */
+  --emerald-500: #10B981;
+  --emerald-400: #34D399;
+  --mint-400: #2DD4BF;
+  --lime-400: #A3E635;
+  --amber-400: #FBBF24;
+  --rose-400: #F43F5E;
+  --cyan-400: #22D3EE;
+
+  /* Typography Colors — High Contrast & Sleek */
+  --text-primary: #F8FAFC;       /* Slate 50 for clean readability */
+  --text-secondary: #CBD5E1;     /* Slate 300 */
+  --text-muted: #94A3B8;         /* Slate 400 */
+  --text-dim: #64748B;           /* Slate 500 */
+
+  /* Typography */
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Rounded Radii */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(6, 182, 212, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+    linear-gradient(180deg, #070B14 0%, #0A101F 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Cyber Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-canvas);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Typography Utility */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+}
+
+/* ====================================================================
+   Frosted Dark Glass Panels & Cards
+   ==================================================================== */
+
+.glass-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-clay);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--clay-shadow-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.glass-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-clay);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--clay-shadow-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  background: var(--bg-surface-elevated);
+  box-shadow: var(--clay-shadow-hover);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.glass-card:active {
+  transform: translateY(1px);
+  box-shadow: var(--clay-shadow-sm);
+}
+
+/* ====================================================================
+   Neon Cyber Buttons
+   ==================================================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--clay-shadow-btn-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  box-shadow: 
+    0 6px 24px rgba(16, 185, 129, 0.55),
+    0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: var(--clay-shadow-btn-pressed);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-clay);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--clay-shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: #1E2D4A;
+  color: #FFFFFF;
+  border-color: rgba(148, 163, 184, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+  box-shadow: var(--clay-shadow-sunken);
+}
+
+/* ====================================================================
+   Pill Badges (Luminous Cyber Dark Badges)
+   ==================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.badge-emerald {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+.badge-amber {
+  background: rgba(245, 158, 11, 0.15);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+
+.badge-rose {
+  background: rgba(244, 63, 94, 0.15);
+  color: #FB7185;
+  border: 1px solid rgba(244, 63, 94, 0.45);
+}
+
+.badge-cyan {
+  background: rgba(6, 182, 212, 0.15);
+  color: #22D3EE;
+  border: 1px solid rgba(6, 182, 212, 0.45);
+}
+
+.badge-lime {
+  background: rgba(163, 230, 53, 0.15);
+  color: #BEF264;
+  border: 1px solid rgba(163, 230, 53, 0.45);
+}
+
+.badge-peach, .badge-coral {
+  background: rgba(249, 115, 22, 0.15);
+  color: #FB923C;
+  border: 1px solid rgba(249, 115, 22, 0.45);
+}
+
+.badge-purple {
+  background: rgba(168, 85, 247, 0.15);
+  color: #C084FC;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+}
+
+/* ====================================================================
+   Dark Inset Form Controls
+   ==================================================================== */
+
+.input-field {
+  width: 100%;
+  background: var(--bg-surface-sunken);
+  border: 1px solid var(--border-clay);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  box-shadow: var(--clay-shadow-sunken);
+  transition: all var(--transition-fast);
+}
+
+.input-field:focus {
+  border-color: #10B981;
+  background: #0E1626;
+  box-shadow: 
+    0 0 0 3px rgba(16, 185, 129, 0.25),
+    0 0 12px rgba(16, 185, 129, 0.15);
+}
+
+/* Macro Meter */
+.meter-bar {
+  height: 10px;
+  background: #1E293B;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 8px currentColor;
+  transition: width var(--transition-smooth);
+}

@@ -1,0 +1,352 @@
+/* ====================================================================
+   FoodVerse AI — Sleek Cyber-Dark Layout & Components
+   Custom Edition by tanuDubey-077
+   ==================================================================== */
+
+.app-viewport {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  background: transparent;
+  position: relative;
+}
+
+/* Ambient Neon Glow Spheres */
+.ambient-mesh {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.glow-orb-1 {
+  position: absolute;
+  top: -10%;
+  left: 15%;
+  width: 48vw;
+  height: 48vw;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, transparent 65%);
+  filter: blur(80px);
+  animation: floatOrb 22s ease-in-out infinite alternate;
+}
+
+.glow-orb-2 {
+  position: absolute;
+  bottom: -10%;
+  right: 10%;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, transparent 65%);
+  filter: blur(90px);
+  animation: floatOrb 28s ease-in-out infinite alternate-reverse;
+}
+
+.glow-orb-3 {
+  position: absolute;
+  top: 40%;
+  right: 35%;
+  width: 38vw;
+  height: 38vw;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.10) 0%, transparent 65%);
+  filter: blur(95px);
+  animation: floatOrb 25s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(35px, -25px) scale(1.06); }
+  100% { transform: translate(-25px, 35px) scale(0.96); }
+}
+
+/* ====================================================================
+   Cyber Navigation Rail (Sidebar)
+   ==================================================================== */
+
+.spatial-nav-rail {
+  width: 268px;
+  background: #0B1120;
+  border-right: 1px solid rgba(51, 65, 85, 0.6);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 40;
+  transition: width var(--transition-smooth);
+}
+
+.spatial-nav-rail.collapsed {
+  width: 86px;
+}
+
+.nav-header {
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.8);
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.brand-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 16px rgba(16, 185, 129, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform var(--transition-normal);
+}
+
+.brand-badge:hover .brand-icon-wrapper {
+  transform: scale(1.06) rotate(3deg);
+}
+
+.nav-links-container {
+  flex: 1;
+  padding: 1.25rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  overflow-y: auto;
+}
+
+.nav-section-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+  padding: 0.85rem 0.75rem 0.35rem;
+}
+
+.nav-link-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.nav-link-item:hover {
+  color: #FFFFFF;
+  background: rgba(30, 41, 59, 0.7);
+  transform: translateX(3px);
+  border-color: rgba(71, 85, 105, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link-item.active {
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.45);
+  font-weight: 700;
+  box-shadow: 
+    0 4px 16px rgba(16, 185, 129, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+/* ====================================================================
+   Cyber Top Bar (Header)
+   ==================================================================== */
+
+.spatial-topbar {
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.25rem;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+  background: rgba(11, 17, 32, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.command-search-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #111A2E;
+  border: 1px solid rgba(51, 65, 85, 0.8);
+  border-radius: var(--radius-full);
+  padding: 0.6rem 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--clay-shadow-sunken);
+  transition: all var(--transition-fast);
+}
+
+.command-search-btn:hover {
+  border-color: #64748B;
+  background: #16223B;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.kbd-shortcut {
+  background: #1E293B;
+  border: 1px solid rgba(71, 85, 105, 0.8);
+  border-radius: 6px;
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #CBD5E1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ====================================================================
+   Main Cyber Canvas
+   ==================================================================== */
+
+.spatial-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.spatial-canvas {
+  flex: 1;
+  padding: 2.5rem;
+  max-width: 1480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ====================================================================
+   Command Palette Cyber Modal
+   ==================================================================== */
+
+.command-palette-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  z-index: 100;
+  animation: fadeIn 180ms ease;
+}
+
+.command-palette-modal {
+  width: 100%;
+  max-width: 640px;
+  background: #111A2E;
+  border: 1px solid rgba(71, 85, 105, 0.8);
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.8),
+    0 10px 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ====================================================================
+   Cyber Dropzone
+   ==================================================================== */
+
+.spatial-dropzone {
+  border: 2px dashed rgba(71, 85, 105, 0.8);
+  border-radius: var(--radius-xl);
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(17, 26, 46, 0.7);
+  box-shadow: var(--clay-shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.spatial-dropzone:hover, .spatial-dropzone.active {
+  border-color: #10B981;
+  background: rgba(16, 185, 129, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 16px 32px -4px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+/* ====================================================================
+   Grid Layouts
+   ==================================================================== */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-3, .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .spatial-nav-rail {
+    display: none;
+  }
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .spatial-canvas {
+    padding: 1.25rem;
+  }
+  .spatial-topbar {
+    padding: 0 1rem;
+  }
+}
