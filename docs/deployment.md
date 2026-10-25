@@ -69,3 +69,15 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ### Deploying to Vercel (Frontend) + Render (Backend)
 - Frontend: Set root directory to `frontend`, output directory to `dist`, and set `VITE_API_BASE_URL=https://your-api.onrender.com/api/v1`.
 - Backend: Configure `ALLOWED_ORIGINS` to include your Vercel domain.
+
+---
+
+## 4. Live Production Deployment on Render
+
+The official live cloud deployment of FoodVerse AI is hosted on Render via Blueprint infrastructure-as-code (`render.yaml`):
+
+* **Web Application (Frontend):** [https://foodverse-frontend-l1bc.onrender.com](https://foodverse-frontend-l1bc.onrender.com)
+* **API Gateway (Backend):** [https://foodverse-backend-etpe.onrender.com](https://foodverse-backend-etpe.onrender.com)
+* **Interactive Swagger Documentation:** [https://foodverse-backend-etpe.onrender.com/docs](https://foodverse-backend-etpe.onrender.com/docs)
+* **Health Check Endpoint:** [https://foodverse-backend-etpe.onrender.com/api/v1/health](https://foodverse-backend-etpe.onrender.com/api/v1/health)
+

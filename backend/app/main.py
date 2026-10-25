@@ -28,6 +28,7 @@ else:
 allowed_origins = [origin.rstrip("/") for origin in allowed_origins if origin]
 
 render_origins = [
+    "https://foodverse-frontend-l1bc.onrender.com",
     "https://foodverse-frontend.onrender.com",
     "https://foodverseai-1.onrender.com",
 ]

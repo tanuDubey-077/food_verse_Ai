@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     # CORS
     ALLOWED_ORIGINS: Union[str, List[str]] = (
         "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,"
-        "https://foodverse-frontend.onrender.com,https://foodverseai-1.onrender.com"
+        "https://foodverse-frontend-l1bc.onrender.com,https://foodverse-frontend.onrender.com,https://foodverseai-1.onrender.com"
     )
 
     @field_validator("ALLOWED_ORIGINS", mode="before")

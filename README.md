@@ -8,6 +8,14 @@
 [![Tests](https://img.shields.io/badge/Pytest-33%2F33%20Passing-10b981)](#-testing--quality-assurance)
 [![OxLint](https://img.shields.io/badge/OxLint-0%20Warnings-10b981)](https://oxc.rs)
 [![UI Theme](https://img.shields.io/badge/Theme-Cyber--Dark%20AI-06b6d4)](#-spatial-user-interface-design)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render%20Production-10b981?style=for-the-badge&logo=render&logoColor=white)](https://foodverse-frontend-l1bc.onrender.com)
+[![API Gateway](https://img.shields.io/badge/API%20Gateway-FastAPI%20Live-059669?style=for-the-badge&logo=fastapi&logoColor=white)](https://foodverse-backend-etpe.onrender.com)
+[![Swagger](https://img.shields.io/badge/API%20Docs-Swagger%20UI-06b6d4?style=for-the-badge&logo=swagger&logoColor=white)](https://foodverse-backend-etpe.onrender.com/docs)
+
+> **🚀 LIVE PRODUCTION DEMO:** [https://foodverse-frontend-l1bc.onrender.com](https://foodverse-frontend-l1bc.onrender.com)  
+> **📡 LIVE BACKEND API GATEWAY:** [https://foodverse-backend-etpe.onrender.com](https://foodverse-backend-etpe.onrender.com)  
+> **📑 INTERACTIVE API DOCUMENTATION:** [https://foodverse-backend-etpe.onrender.com/docs](https://foodverse-backend-etpe.onrender.com/docs)  
+> **🩺 SYSTEM HEALTH CHECK:** [https://foodverse-backend-etpe.onrender.com/api/v1/health](https://foodverse-backend-etpe.onrender.com/api/v1/health)
 
 > A production-grade multimodal food intelligence web platform integrating Google Gemini 2.5 Flash visual intelligence, temporal kitchen safety auditing, conversational recipe synthesis, verified USDA nutritional composition databases, and robust local offline fallback engines within an immersive **Cyber-Dark Spatial UI**.
 
@@ -429,7 +437,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: ALLOWED_ORIGINS
-        value: http://localhost:5173,https://foodverse-frontend.onrender.com
+        value: http://localhost:5173,https://foodverse-frontend-l1bc.onrender.com,https://foodverse-frontend.onrender.com
       - key: LOG_LEVEL
         value: info
 
@@ -439,15 +447,21 @@ services:
     runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    staticPublishPath: ./dist
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
-        value: https://foodverse-backend.onrender.com/api/v1
+        value: https://foodverse-backend-etpe.onrender.com/api/v1
 ```
+
+### 🌐 Verified Live Cloud URLs:
+* **Production Web App:** [https://foodverse-frontend-l1bc.onrender.com](https://foodverse-frontend-l1bc.onrender.com)
+* **Production API Gateway:** [https://foodverse-backend-etpe.onrender.com](https://foodverse-backend-etpe.onrender.com)
+* **Swagger Documentation:** [https://foodverse-backend-etpe.onrender.com/docs](https://foodverse-backend-etpe.onrender.com/docs)
+* **API Health Check:** [https://foodverse-backend-etpe.onrender.com/api/v1/health](https://foodverse-backend-etpe.onrender.com/api/v1/health)
 
 ### Deployment Steps on Render:
 1. Push your repository to GitHub.
