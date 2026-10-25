@@ -434,8 +434,9 @@ services:
         value: info
 
   # 2. React Vite Frontend Static Site
-  - type: static
+  - type: web
     name: foodverse-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist

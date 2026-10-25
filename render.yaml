@@ -19,8 +19,9 @@ services:
       - key: LOG_LEVEL
         value: info
 
-  - type: static
+  - type: web
     name: foodverse-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
