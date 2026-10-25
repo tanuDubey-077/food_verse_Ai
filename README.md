@@ -429,7 +429,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: ALLOWED_ORIGINS
-        value: http://localhost:5173,https://foodverseai-1.onrender.com
+        value: http://localhost:5173,https://foodverse-frontend.onrender.com
       - key: LOG_LEVEL
         value: info
 
@@ -439,9 +439,13 @@ services:
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
-        value: https://foodverseai-1.onrender.com/api/v1
+        value: https://foodverse-backend.onrender.com/api/v1
 ```
 
 ### Deployment Steps on Render:

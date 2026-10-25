@@ -27,9 +27,13 @@ else:
 
 allowed_origins = [origin.rstrip("/") for origin in allowed_origins if origin]
 
-render_frontend_origin = "https://foodverseai-1.onrender.com"
-if render_frontend_origin not in allowed_origins:
-    allowed_origins.append(render_frontend_origin)
+render_origins = [
+    "https://foodverse-frontend.onrender.com",
+    "https://foodverseai-1.onrender.com",
+]
+for origin in render_origins:
+    if origin not in allowed_origins:
+        allowed_origins.append(origin)
 
 # Keep localhost development origins usable while allowing the deployed frontend origin in production.
 dev_origins = [
