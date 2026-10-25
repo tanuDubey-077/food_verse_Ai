@@ -11,26 +11,31 @@ import {
   UserProfileSettings
 } from '../types';
 
-const DEFAULT_API_BASE = 'http://localhost:8000/api/v1';
+const resolveApiBase = (): string => {
+  if (typeof window !== 'undefined' && window.location) {
+    const { protocol, hostname, port } = window.location;
 
-const API_BASE = (() => {
-  const rawValue = import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE;
-  const normalized = String(rawValue).trim().replace(/\/+$/, '');
+    const envUrl = import.meta.env.VITE_API_BASE_URL;
+    if (envUrl && typeof envUrl === 'string' && envUrl.trim()) {
+      const trimmed = envUrl.trim().replace(/\/+$/, '');
+      if (!trimmed.includes('localhost:8000') && !trimmed.includes('127.0.0.1:8000')) {
+        return trimmed.endsWith('/api/v1') ? trimmed : `${trimmed}/api/v1`;
+      }
+    }
 
-  if (!normalized) {
-    return DEFAULT_API_BASE;
+    // In development mode with separate Vite server (port 5173 / 3000)
+    if (port === '5173' || port === '3000') {
+      return `${protocol}//${hostname}:8000/api/v1`;
+    }
+
+    // In unified server mode (FastAPI on port 8000 or production domain)
+    return '/api/v1';
   }
 
-  if (normalized.endsWith('/api/v1')) {
-    return normalized;
-  }
+  return 'http://127.0.0.1:8000/api/v1';
+};
 
-  if (normalized.includes('/api/v1')) {
-    return normalized.replace(/\/+$/, '');
-  }
-
-  return `${normalized}/api/v1`;
-})();
+const API_BASE = resolveApiBase();
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {

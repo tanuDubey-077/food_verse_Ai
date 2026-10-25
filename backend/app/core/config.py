@@ -60,7 +60,7 @@ class Settings(BaseSettings):
         return key.strip()
 
     def is_gemini_configured(self) -> bool:
-        """Checks if a valid Gemini API key is present."""
+        """Checks if a Gemini API key is configured."""
         return bool(self.get_gemini_api_key())
 
     model_config = SettingsConfigDict(
